@@ -75,7 +75,7 @@ def main(args):
     )
 
     for name, dataset in zip(
-        ["train", "valid", "text"], [train_dataset, valid_dataset, test_dataset]
+        ["train", "valid", "test"], [train_dataset, valid_dataset, test_dataset]
     ):
         convert_to(dataset, record_directory, name)
 
