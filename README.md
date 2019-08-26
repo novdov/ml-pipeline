@@ -8,7 +8,7 @@ Pipeline for data, training, evaluating, and serving ML model.
   - Train and evaluate model, and compare it with served model.
 
 
-## Prerequisite
+## Requirements
 ```text
 python >= 3.6
 adanet
