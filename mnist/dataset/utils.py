@@ -24,7 +24,8 @@ from typing import Tuple
 
 import numpy as np
 import tensorflow as tf
-from tensorflow.python.data import Dataset
+
+from mnist import SEED
 
 
 def read32(bytestream):
@@ -116,19 +117,18 @@ def dataset(directory, images_file, labels_file):
 
 
 def split_train_valid(
-    tf_dataset: Dataset,
+    tf_dataset: tf.data.Dataset,
     train_size: int = 55000,
     valid_size: int = 5000,
-    shuffle=False,
-    seed=1234,
-) -> Tuple[Dataset, Dataset]:
-    tf_dataset = tf_dataset.shuffle(train_size + valid_size, seed=seed)
+    shuffle=True,
+) -> Tuple[tf.data.Dataset, tf.data.Dataset]:
+    tf_dataset = tf_dataset.shuffle(train_size + valid_size, seed=SEED)
 
     train_dataset = tf_dataset.take(train_size)
     valid_dataset = tf_dataset.skip(train_size)
 
     if shuffle:
-        train_dataset = train_dataset.shuffle(train_size, seed=seed)
-        valid_dataset = valid_dataset.shuffle(valid_size, seed=seed)
+        train_dataset = train_dataset.shuffle(train_size, seed=SEED)
+        valid_dataset = valid_dataset.shuffle(valid_size, seed=SEED)
 
     return train_dataset, valid_dataset

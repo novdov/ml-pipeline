@@ -1,0 +1,10 @@
+{
+  "learning_rate": 0.003,
+  "batch_size": 128,
+  "adanet_iterations": 2,
+  "train_steps": 5000,
+  "summary_steps": 1000,
+  "ckpt_steps": 1000,
+  "max_ckpt": 10,
+  "unflatten": false
+}
