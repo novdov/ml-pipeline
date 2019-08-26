@@ -28,7 +28,7 @@ def get_parser(_=None):
     parser.add_argument(
         "--split_valid",
         type=_bool_str,
-        default=False,
+        default=True,
         help="whether split train into train/valid.",
     )
     return parser
@@ -69,8 +69,12 @@ def convert_dataset(
     raw_directory = os.path.join(directory, "raw_data")
     txt_directory = os.path.join(directory, "txt")
 
-    train_dataset = utils.dataset(raw_directory, TRAIN_IMAGES, TRAIN_LABELS)
-    test_dataset = utils.dataset(raw_directory, TEST_IMAGES, TEST_LABELS)
+    train_dataset = utils.dataset(
+        raw_directory, TRAIN_IMAGES, TRAIN_LABELS, normalize=False
+    )
+    test_dataset = utils.dataset(
+        raw_directory, TEST_IMAGES, TEST_LABELS, normalize=False
+    )
 
     if split_valid:
         train_dataset, valid_dataset = utils.split_train_valid(

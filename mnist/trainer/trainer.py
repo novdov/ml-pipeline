@@ -50,8 +50,5 @@ class AdanetTrainer:
     @staticmethod
     def get_eval_spec(eval_input_fn):
         return tf.estimator.EvalSpec(
-            input_fn=eval_input_fn,
-            steps=None,
-            start_delay_secs=1,
-            throttle_secs=1,
+            input_fn=eval_input_fn, steps=None, start_delay_secs=1, throttle_secs=1
         )

@@ -21,14 +21,14 @@ def get_parser(_=None):
         return string == "true"
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--directory", type=str, help="directory for output data.")
-    parser.add_argument("--train_size", type=int, default=55000, help="train size.")
-    parser.add_argument("--valid_size", type=int, default=5000, help="validation size.")
+    parser.add_argument("--directory", type=str, help="directory for output data")
+    parser.add_argument("--train_size", type=int, default=55000, help="train size")
+    parser.add_argument("--valid_size", type=int, default=5000, help="validation size")
     parser.add_argument(
         "--split_valid",
         type=_bool_str,
         default=True,
-        help="whether split train into train/valid.",
+        help="whether split train into train/valid",
     )
     return parser
 
