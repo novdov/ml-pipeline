@@ -6,5 +6,5 @@
   "summary_steps": 1000,
   "ckpt_steps": 1000,
   "max_ckpt": 10,
-  "unflatten": false
+  "unflatten": true
 }
