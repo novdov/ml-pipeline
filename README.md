@@ -3,7 +3,7 @@ Pipeline for data, training, evaluating, and serving ML model.
 
 - Current data/task: MNIST
 - Data Input: Google BigQuery (current: tfrecords from local)
-  - Curretn Issue: Low accuracy when using data from BigQuery
+  - Curretn Issue: Low accuracy when using data from BigQuery (0.96 vs 0.78)
 - Training/Evaluation: AutoML (using [adanet](https://github.com/tensorflow/adanet))
 - Serving: Serveless API (using Google Cloud Functions)
   - Train and evaluate model, and compare it with served model.
