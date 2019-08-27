@@ -15,6 +15,7 @@ adanet
 tensorflow >= 1.14, < 2.0
 pyarrow
 google-cloud-storage
+google-api-python-client
 ```
 
 ## Usage
@@ -56,7 +57,7 @@ Serving uses Google Cloud Functions.
 
 After first serving, train and evaluate model, and compare it with served model.
 ```bash
-PYTHONPATH="." python3 mnist/bin/evaluate.py \
+PYTHONPATH="." python3 mnist/bin/train_and_evaluate.py \
 --model_dir="[output directory of model weights]" \
 --hparams_path="hparams.json" \
 --experiment_name="[experiment name (e.g.) dnn)]" \
