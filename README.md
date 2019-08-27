@@ -33,7 +33,7 @@ PYTHONPATH="." python3 mnist/dataset/convert_to_txt.py --directory="[output dire
 # Upload files to BigQuery
 PYTHONPATH="." python3 mnist/dataset/upload_to_bigquery.py \
 --data_dir="[directory where source files are stored]" \
---dataset_id="[Your Dataset Id of BigQuery]" \
+--dataset_id="[BigQuery dataset id]" \
 --client_type="bigquery"
 ```
 
@@ -51,5 +51,15 @@ PYTHONPATH="." python3 mnist/bin/train.py \
 ### Serving
 
 Serving uses Google Cloud Functions.
+1. Upload model to GCP AI Platform. ([See this](https://cloud.google.com/blog/products/ai-machine-learning/empower-your-ai-platform-trained-serverless-endpoints-with-machine-learning-on-google-cloud-functions))
+2. Request to model API (See `mnist/inference/api.py`)
 
-- Now in progress
+After first serving, train and evaluate model, and compare it with served model.
+```bash
+PYTHONPATH="." python3 mnist/bin/evaluate.py \
+--project_id="[Project id]" \
+--model_name="[model name on AI platform]" \
+--version="[model version]" \
+--dataset_id="[BigQuery dataset id]" \
+--hparams_path="hparams.json"
+``` 
