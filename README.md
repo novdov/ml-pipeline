@@ -1,7 +1,7 @@
 # ml-pipeline
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
 
-Pipeline for data, training, evaluating, and serving ML model.
+Pipeline for data, training, evaluating, and serving ML model. Inspired by this [post](https://www.facebook.com/groups/TensorFlowKR/permalink/971390023202056/).
 
 - Current data/task: MNIST
 - Data Input: Google BigQuery
