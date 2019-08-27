@@ -57,9 +57,12 @@ Serving uses Google Cloud Functions.
 After first serving, train and evaluate model, and compare it with served model.
 ```bash
 PYTHONPATH="." python3 mnist/bin/evaluate.py \
+--model_dir="[output directory of model weights]" \
+--hparams_path="hparams.json" \
+--experiment_name="[experiment name (e.g.) dnn)]" \
+--dataset_id="[BigQuery dataset id]" \
 --project_id="[Project id]" \
 --model_name="[model name on AI platform]" \
 --version="[model version]" \
---dataset_id="[BigQuery dataset id]" \
---hparams_path="hparams.json"
-``` 
+--max_request="[max number of instances to request at once]" \
+```
