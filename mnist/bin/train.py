@@ -12,11 +12,11 @@ from mnist.trainer.utils import make_config
 
 MODEL_MAPPER = {"dnn": DNNGenerator}
 
-tf.logging.set_verbosity("INFO")
+tf.compat.v1.logging.set_verbosity("INFO")
 
 
 def get_parser(_=None):
-    parser = argparse.ArgumentParser("Adanet for MNIST")
+    parser = argparse.ArgumentParser("Adanet for MNIST [Training]")
     parser.add_argument("--model_dir", type=str, help="output directory for model")
     parser.add_argument("--hparams_path", type=str, help="path of json format hparams")
     parser.add_argument("--experiment_name", type=str, help="experiment name")
@@ -61,9 +61,7 @@ def train_and_evaluate(
         eval_dataset.get_input_fn(batch_size),
     )
 
-    print("Training Done.")
-    print(f"Accuracy: {results['accuracy']}")
-    print(f"    Loss: {results['average_loss']}")
+    return {"accuracy": results["accuracy"], "loss": results["average_loss"]}
 
 
 if __name__ == "__main__":
@@ -73,6 +71,6 @@ if __name__ == "__main__":
     if not os.path.exists(model_dir):
         os.makedirs(model_dir)
 
-    train_and_evaluate(
+    results = train_and_evaluate(
         args.experiment_name, model_dir, args.hparams_path, args.dataset_id
     )
