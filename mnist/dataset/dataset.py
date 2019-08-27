@@ -46,7 +46,9 @@ class MNISTDataset:
 
         labels, images = arrows_dict["key"], arrows_dict["image"]
         labels = np.array(labels)
-        images = np.array([_string_to_float(image) for image in tqdm.tqdm(images)], "float")
+        images = np.array(
+            [_string_to_float(image) for image in tqdm.tqdm(images)], "float"
+        )
 
         # Result from BigQuery are sorted by key.
         data = list(zip(images, labels))
