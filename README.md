@@ -1,4 +1,6 @@
 # ml-pipeline
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
+
 Pipeline for data, training, evaluating, and serving ML model.
 
 - Current data/task: MNIST
