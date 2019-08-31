@@ -60,10 +60,9 @@ model_name = "MODEL_NAME"
 version = "v1"
 
 api = InferAPI(project_id, model_name, version)
-# each pixels array: (28, 28, 1)
-images = [
-    [pixels], [pixels], ...
-]
+# each List[float]: (28, 28, 1)
+# images = [image.reshape([28, 28, 1]).tolist() for image in images_array]
+images = List[List[float]]
 pred = api.predict(images)
 ```
 
