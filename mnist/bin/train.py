@@ -30,12 +30,8 @@ def train_and_evaluate(
     hparams = tf.contrib.training.HParams(**json.load(open(hparam_path)))
     batch_size = hparams.batch_size
 
-    train_dataset = MNISTDataset(
-        tf.estimator.ModeKeys.TRAIN, dataset_id, hparams.unflatten
-    )
-    eval_dataset = MNISTDataset(
-        tf.estimator.ModeKeys.EVAL, dataset_id, hparams.unflatten
-    )
+    train_dataset = MNISTDataset(tf.estimator.ModeKeys.TRAIN, dataset_id)
+    eval_dataset = MNISTDataset(tf.estimator.ModeKeys.EVAL, dataset_id)
 
     trainer = AdanetTrainer(hparams.train_steps)
 
@@ -43,7 +39,7 @@ def train_and_evaluate(
     network_generator = network_generator_cls(hparams.learning_rate)
 
     estimator = trainer.create_estimator(
-        network_generator.build_subnetwork_generator(hparams.unflatten),
+        network_generator.build_subnetwork_generator(),
         hparams.adanet_iterations,
         adanet.Evaluator(input_fn=train_dataset.get_input_fn(batch_size)),
         make_config(

@@ -19,22 +19,10 @@ class MNISTDataset:
 
     TABLES = {TRAIN: "train", EVAL: "valid", PREDICT: "test"}
 
-    def __init__(
-        self, mode: tf.estimator.ModeKeys, dataset_id: str, unflatten: bool = True
-    ):
-        self.mode = mode
-        self.dataset_id = dataset_id
-        self.unflatten = unflatten
-        self.client = get_client("bigquery")
-
-        self.data = self.get_data()
-
     def get_data(self):
         def _string_to_float(_raw_image: str):
             arr = np.asarray(_raw_image.split(","), "float")
-            if self.unflatten:
-                return arr.reshape([28, 28])
-            return arr
+            return arr.reshape([28, 28])
 
         mode = self.mode
         dataset_ref = self.client.dataset(self.dataset_id)
@@ -56,6 +44,13 @@ class MNISTDataset:
         images, labels = zip(*data)
         return np.array(images, "float"), np.array(labels, "int")
 
+    def __init__(self, mode: tf.estimator.ModeKeys, dataset_id: str):
+        self.mode = mode
+        self.dataset_id = dataset_id
+        self.client = get_client("bigquery")
+
+        self.data = self.get_data()
+
     def data_generator(self):
         def _gen():
             for image, label in zip(*self.data):
@@ -66,13 +61,12 @@ class MNISTDataset:
     def get_input_fn(self, batch_size: int, shuffle=False):
         def _preprocess(image, label):
             image = image / 255.0
-            if self.unflatten:
-                image = tf.reshape(image, [28, 28, 1])
+            image = tf.reshape(image, [28, 28, 1])
             return {"image": image}, label
 
         def _get_input_fn():
             output_types = (tf.float32, tf.int32)
-            output_shapes = ([28, 28] if self.unflatten else [784], [])
+            output_shapes = [28, 28]
 
             dataset = tf.data.Dataset.from_generator(
                 self.data_generator(), output_types, output_shapes

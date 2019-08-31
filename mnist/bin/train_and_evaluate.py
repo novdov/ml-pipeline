@@ -7,10 +7,10 @@ import adanet
 import numpy as np
 import tensorflow as tf
 
-from mnist.trainer import AdanetTrainer
-from mnist.inference.api import InferAPI
 from mnist.bin import train
 from mnist.dataset import MNISTDataset
+from mnist.inference.api import InferAPI
+from mnist.trainer import AdanetTrainer
 
 
 def get_parser(_=None):
@@ -22,8 +22,9 @@ def get_parser(_=None):
     parser.add_argument("--project_id", type=str, help="project id on GCP")
     parser.add_argument("--model_name", type=str, help="model name for inference")
     parser.add_argument("--version", type=str, help="model version")
-    parser.add_argument("--max_request", type=int, help="max number of requests at once",
-                        default=100)
+    parser.add_argument(
+        "--max_request", type=int, help="max number of requests at once", default=100
+    )
     parser.add_argument(
         "--model_logging_path",
         type=str,
@@ -68,21 +69,19 @@ if __name__ == "__main__":
     estimator = adanet.Estimator(
         head=AdanetTrainer(1000).head,
         max_iteration_steps=500,
-        subnetwork_generator=network_generator.build_subnetwork_generator(hparams.unflatten),
-        model_dir=args.model_dir
+        subnetwork_generator=network_generator.build_subnetwork_generator(
+            hparams.unflatten
+        ),
+        model_dir=args.model_dir,
     )
 
-    test_dataset = MNISTDataset(
-        tf.estimator.ModeKeys.PREDICT, args.dataset_id, hparams.unflatten
-    )
+    test_dataset = MNISTDataset(tf.estimator.ModeKeys.PREDICT, args.dataset_id)
 
     tf.compat.v1.logging.info("Prepare test data.")
     test_predictions = estimator.predict(test_dataset.get_input_fn(hparams.batch_size))
     test_predictions = [pred for pred in test_predictions]
 
-    class_ids = np.array([
-        r["class_ids"].item() for r in test_predictions
-    ])
+    class_ids = np.array([r["class_ids"].item() for r in test_predictions])
     answers = test_dataset.data[1]
 
     test_accuracy = (class_ids == answers) / len(answers)

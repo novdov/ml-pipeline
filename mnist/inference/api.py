@@ -1,4 +1,3 @@
-import math
 from typing import List, Mapping, Optional
 
 import googleapiclient.discovery
@@ -21,8 +20,7 @@ class InferAPI:
         self._model_name = model_name
         self._version = version
         self.service = googleapiclient.discovery.build(
-            serviceName=service_name,
-            version=version
+            serviceName=service_name, version=version
         )
 
     def predict(self, images: List[List[float]], batch_size: int = 100) -> Mapping:

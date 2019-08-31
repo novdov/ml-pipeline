@@ -12,7 +12,9 @@ def get_parser(_=None):
     parser.add_argument("--version", type=str, help="model version")
     parser.add_argument("--dataset_id", type=str, help="dataset id on google BigQuery")
     parser.add_argument("--hparams_path", type=str, help="path of json format hparams")
-    parser.add_argument("--max_request", type=int, help="max number of requests at once", default=100)
+    parser.add_argument(
+        "--max_request", type=int, help="max number of requests at once", default=100
+    )
     return parser
 
 
@@ -29,9 +31,7 @@ if __name__ == "__main__":
     api = InferAPI(args.project_id, args.model_name, args.version)
 
     hparams = tf.contrib.training.HParams(**json.load(open(args.hparams_path)))
-    test_dataset = MNISTDataset(
-        tf.estimator.ModeKeys.PREDICT, args.dataset_id, hparams.unflatten
-    )
+    test_dataset = MNISTDataset(tf.estimator.ModeKeys.PREDICT, args.dataset_id)
 
     images = [
         image.reshape([28, 28, 1]).tolist() for image in test_dataset.data[0] / 255.0
