@@ -51,6 +51,23 @@ PYTHONPATH="." python3 mnist/bin/train.py \
 --hparams_path="hparams.json"
 ```
 
+### Inference
+```python
+from mnist.inference.api import InferAPI
+
+project_id = "PROJECT_ID"
+model_name = "MODEL_NAME"
+version = "v1"
+
+api = InferAPI(project_id, model_name, version)
+# each pixels array: (28, 28, 1)
+images = [
+    [pixels], [pixels], ...
+]
+pred = api.predict(images)
+```
+
+
 ### Serving
 
 Serving uses Google Cloud Functions.
