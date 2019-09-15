@@ -5,10 +5,10 @@ import os
 import adanet
 import tensorflow as tf
 
-from mnist.dataset import MNISTDataset
-from mnist.model_generator.dnn import DNNGenerator
-from mnist.trainer import AdanetTrainer
-from mnist.trainer.utils import make_config
+from pipeline.dataset import MNISTDataset
+from pipeline.model_generator.dnn import DNNGenerator
+from pipeline.trainer import AdanetTrainer
+from pipeline.trainer.utils import make_config
 
 MODEL_MAPPER = {"dnn": DNNGenerator}
 

@@ -1,7 +1,7 @@
 import tensorflow as tf
 from adanet.examples import simple_dnn
 
-from mnist import SEED
+from pipeline import SEED
 
 
 class DNNGenerator:

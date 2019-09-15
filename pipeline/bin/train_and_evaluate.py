@@ -7,10 +7,10 @@ import adanet
 import numpy as np
 import tensorflow as tf
 
-from mnist.bin import train
-from mnist.dataset import MNISTDataset
-from mnist.inference.api import InferAPI
-from mnist.trainer import AdanetTrainer
+from pipeline.bin import train
+from pipeline.dataset import MNISTDataset
+from pipeline.inference.api import InferAPI
+from pipeline.trainer import AdanetTrainer
 
 
 def get_parser(_=None):

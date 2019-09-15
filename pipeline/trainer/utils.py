@@ -2,7 +2,7 @@ import os
 
 import tensorflow as tf
 
-from mnist import SEED
+from pipeline import SEED
 
 
 def make_config(

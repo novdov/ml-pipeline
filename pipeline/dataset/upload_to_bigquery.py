@@ -3,7 +3,7 @@ import os
 
 from google.cloud import bigquery
 
-from mnist.dataset.gc import get_client
+from pipeline.dataset.gc import get_client
 
 
 def get_parser(_=None):

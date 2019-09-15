@@ -2,7 +2,7 @@ from typing import List
 
 import numpy as np
 
-from mnist.inference.api import InferAPI
+from pipeline.inference.api import InferAPI
 
 
 def get_parser(_=None):
@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
     import tensorflow as tf
 
-    from mnist.dataset import MNISTDataset
+    from pipeline.dataset import MNISTDataset
 
     args, _ = get_parser().parse_known_args()
 

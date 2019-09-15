@@ -4,8 +4,8 @@ import numpy as np
 import tensorflow as tf
 import tqdm
 
-from mnist import SEED
-from mnist.dataset.gc import get_client
+from pipeline import SEED
+from pipeline.dataset.gc import get_client
 
 random.seed(SEED)
 
@@ -42,7 +42,12 @@ class MNISTDataset:
         data = list(zip(images, labels))
         random.shuffle(data)
         images, labels = zip(*data)
-        return np.array(images, "float"), np.array(labels, "int")
+
+        feature = np.array(images, "float")
+        label = np.array(labels, "int")
+        if self.mode == PREDICT:
+            return feature[:1000], label[:1000]
+        return feature, label
 
     def __init__(self, mode: tf.estimator.ModeKeys, dataset_id: str):
         self.mode = mode

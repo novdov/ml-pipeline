@@ -4,7 +4,7 @@ import os
 import tensorflow as tf
 from tensorflow.python.data import Dataset
 
-from mnist.dataset import utils
+from pipeline.dataset import utils
 
 tf.logging.set_verbosity("INFO")
 
